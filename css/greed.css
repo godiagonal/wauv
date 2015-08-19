@@ -1,0 +1,92 @@
+/* container */
+
+.greed {
+    
+}
+
+.greed:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* square */
+
+.greed .greedSquare {
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+/* square background */
+
+.greed .greedSquareBg {
+    position: absolute;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    margin: 5px;
+    background-image: linear-gradient(135deg, #a29495, #ad6d61);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
+    opacity: 0.5;
+    z-index: -1;
+    transition: all 0.15s ease-out;
+}
+
+/* square background when active */
+
+.greed .greedSquare.activeSelection .greedSquareBg,
+.greed .greedSquare.activeSelection:hover .greedSquareBg {
+    opacity: 1;
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    box-shadow: 0 0 7px 1px #808080;
+    outline: 1px solid #9d9a9a;
+}
+
+.greed .greedSquare.activeSelection .greedSquareWrap,
+.greed .greedSquare.activeSelection:hover .greedSquareWrap{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* square background on hover */
+
+.greed .greedSquare:hover .greedSquareBg {
+    opacity: 0.9;
+    -webkit-filter: grayscale(20%);
+    filter: grayscale(20%);
+}
+
+.greed .greedSquare:hover .greedSquareWrap {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* square text overlay */
+
+.greed .greedSquareWrap {
+    width: calc(100% - 30px);
+    margin: 5px;
+    padding: 10px;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+}
+
+.greed .greedSquareTitle {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.greed .greedSquareText {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

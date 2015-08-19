@@ -1,0 +1,16 @@
+rensar inte sökresultat om man inte får nya
+- sök på: strö lite socker på mig
+
+färganimation mha färgklass
+- https://github.com/gka/chroma.js
+
+animationsklass med flera cirklar bredvid varandra
+
+readme på bitbucket
+- hur en animationsklass ska se ut
+- kontakta oss
+
+vissa låtar spelas inte
+- t ex: http://localhost/wauv/#flume/seekae-test-recognise-flume-re-work
+- förmodligen samma som: https://www.soundcloudcommunity.com/soundcloud/topics/some-soundcloud-cdn-hosted-tracks-dont-have-access-control-allow-origin-header
+- verkar funka nu..? 2015-05-15
