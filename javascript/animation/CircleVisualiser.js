@@ -143,10 +143,17 @@ function CircleVisualiser(audioSource, options) {
             
             prevCircleRadius = circleRadius;
             
+            // update circle
             circle.attr({ r: circleRadius, fill: newColor.hex() });
             
-            if (i == 0)
-                _bg.attr('fill', newColor.luminance(0.8).hex());
+            // update bg
+            if (!_options.invert) {
+                if (i == 0)
+                    _bg.attr('fill', newColor.luminance(0.8).hex());
+            }
+            else {
+                _bg.attr('fill', 'transparent');
+            }
             
         }
         

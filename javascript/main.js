@@ -27,7 +27,7 @@ var animations = [
     {
         name: 'Circles Inverted',
         image: 'images/transparent.png',
-        background: '',
+        background: 'dark',
         init: function() {
             return new CircleVisualiser(audioSource, {
                 circleCount: 8,
