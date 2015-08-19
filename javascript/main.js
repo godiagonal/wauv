@@ -1,7 +1,6 @@
 var animFrame,
+    currentAnimation,
     audioSource,
-    circleCanvas,
-	barCanvas,
     initiated = false,
     searchTimeout,
 	resultContainer,
@@ -10,8 +9,33 @@ var animFrame,
     searchFieldElem,
     smallTitleElem,
     notSupportedElem,
-	isPlaying= false,
-    searchGrid;
+	isPlaying = false,
+    searchGrid,
+    styleGrid;
+
+var animations = [
+    {
+        name: 'Circles',
+        image: 'images/transparent.png',
+        background: '',
+        init: function() {
+            return new CircleVisualiser(audioSource, {
+                circleCount: 8
+            });
+        }
+    },
+    {
+        name: 'Circles Inverted',
+        image: 'images/transparent.png',
+        background: '',
+        init: function() {
+            return new CircleVisualiser(audioSource, {
+                circleCount: 8,
+                invert: true
+            });
+        }
+    }
+]
 
 $(function() {
     
@@ -37,11 +61,16 @@ $(function() {
         minSize: 200
     });
     
-    // create a canvas to animate on
-    circleCanvas = new CircleVisualiser(audioSource, {
-        circleCount: 8
+    // create grid with animation styles
+    styleGrid = new Greed('animationSettingsContainer', animations, {
+        select: function(animation) { setAnimation(animation); },
+        objectKeys: { title: 'name', image: 'image' },
+        minSize: 150
     });
-	//barCanvas = new BarVisualiser(audioSource, 64, 'bars');
+    
+    // init default animation class
+    currentAnimation = animations[0];
+    currentAnimation.instance = currentAnimation.init();
     
     $('#track').on('play', playAudio);
     $('#track').on('pause', pauseAudio);
@@ -54,6 +83,7 @@ $(function() {
     $('#btnShare').on('click', shareTrack);
     $('#txtShare').on('focus', selectText);
     $('#btnFeedbackSubmit').on('click', sendFeedback);
+    $('#btnToggleControls').on('click', toggleControls);
 	$(window).on('keyup', audioEvents);
     $(window).on('keydown', displayEvents);
     
@@ -148,6 +178,8 @@ var showResults = function(tracks) {
     // show error message if there are no results
     else {
         
+        searchGrid.empty();
+        
         $(document.createElement('div'))
             .addClass('notFound')
             .append('No tracks found, try another search phrase')
@@ -183,11 +215,6 @@ var checkHash = function() {
 var setAudio = function(url) {
     
     audioSource.setSourceFromUrl(url);
-    
-    // clean up
-	/*searchGrid.empty();
-    resultContainer.css('opacity', 0);
-	keywordElem.val('');*/
     
 }
 
@@ -266,19 +293,6 @@ var pauseAudio = function() {
     
     audioSource.pause();
     isPlaying = false;
-    
-    // stop rendering
-    if (animFrame) {
-        
-        // use timeout to let the animations finish
-        setTimeout(function() {
-            
-            window.cancelAnimationFrame(animFrame);
-            animFrame = undefined;
-            
-        }, 1000);
-        
-    }
     
 }
 
@@ -374,8 +388,19 @@ var showControls = function() {
     
     // disable grid events
     searchGrid.keyEventsEnabled = false;
+    styleGrid.keyEventsEnabled = false;
     
-    $('#titleSmall').addClass('inverted');
+    // change bg and logo color depending on current animation
+    $('body').removeClass();
+    $('#titleSmall').removeClass('inverted');
+    
+    switch (currentAnimation.background)
+    {
+        case 'dark':
+            $('#titleSmall').addClass('inverted');
+            $('body').addClass('dark');
+            break;
+    }
     
     // since we don't know which overlay page is showing, hide all of them
     $('#about').animate({ opacity: 0 }, 500);
@@ -384,7 +409,6 @@ var showControls = function() {
         
         // one-time-only stuff
         if (!initiated) {
-            $('body').css({ backgroundColor: '#313131' });
             $('#btnHideTrackSearch').show();
             keywordElem.addClass('hasCloseButton');
             initSearchArea();
@@ -424,6 +448,7 @@ var showOverlayPage = function(pageId) {
     
     // disable grid events
     searchGrid.keyEventsEnabled = false;
+    styleGrid.keyEventsEnabled = false;
     
     // start by hiding the audio controls
     $('#controls').animate({ opacity: 0 }, 500, function() {
@@ -443,11 +468,36 @@ var showOverlayPage = function(pageId) {
                 $('#txtSearch').focus();
                 searchGrid.keyEventsEnabled = true; // enable grid events
                 break;
+            case '#animationSettings':
+                styleGrid.resize();
+                styleGrid.keyEventsEnabled = true;
+                break;
         }
         
         $('#titleSmall').removeClass('inverted');
         
     });
+    
+}
+
+// minimize/maximize track controls
+var toggleControls = function() {
+    
+    // hide
+    if ($('#controlsWrap').css('margin-top') == '30px') {
+        
+        $('#controlsWrap').css('margin-top', $('#controlsWrap').innerHeight() + 30);
+        $(this).text('Show controls');
+        
+    }
+    
+    // show
+    else {
+        
+        $('#controlsWrap').css('margin-top', 30);
+        $(this).text('Hide');
+        
+    }
     
 }
 
@@ -545,15 +595,34 @@ var sendFeedback = function() {
 
 /* ----------- START animation functionality ----------- */
 
+// change current animation instance
+var setAnimation = function(animation) {
+    
+    // destroy previous animation instance
+    if (currentAnimation.instance) {
+        currentAnimation.instance.destroy();
+        currentAnimation.instance = null;
+    }
+    
+    // and add the new one
+    currentAnimation = animation;
+    currentAnimation.instance = currentAnimation.init();
+    
+    // finally go back to playback view
+    showControls();
+    
+}
+
 // loop to update canvas from audio data
 var renderFrame = function() {
     
     // make the function recursive
-    animFrame = requestAnimationFrame(renderFrame);
+    if (isPlaying)
+        animFrame = requestAnimationFrame(renderFrame);
     
-    // render bars based on values in frequencyData
-    circleCanvas.draw();
-	//barCanvas.draw();
+    // render the currently active animation instance based on values in frequencyData
+    if (currentAnimation.instance)
+        currentAnimation.instance.draw();
     
 }
 

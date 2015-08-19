@@ -19,7 +19,8 @@ function Greed(containerId, data, options) {
             image: 'img',
             title: 'title',
             text: 'text'
-        }
+        },
+        customAttributes: {}
     }
     
     var _self = this,
@@ -102,8 +103,31 @@ function Greed(containerId, data, options) {
         var elem = _getTemplateElem();
 
         elem.id = 'greedSquare' + (index + 1);
-        elem.setAttribute('greedId', index + 1);
         elem.style.width = _squareSize + '%';
+        elem.setAttribute('greedId', index + 1);
+        
+        // set custom attributes, makes use of handlebar notation
+        for (var key in _options.customAttributes) {
+            
+            if (_options.customAttributes.hasOwnProperty(key)) {
+                
+                // regex magic to replace handlebars with properties of the current object
+                var value = _options.customAttributes[key].replace(/{{([^{}]+)}}/g, function(str) {
+                    
+                    objKey = str.replace(/{/g, '').replace(/}/g, '');
+                    
+                    if (_data[index].hasOwnProperty(objKey))
+                        return _data[index][objKey];
+                    else
+                        return str;
+                    
+                });
+                
+                elem.setAttribute(key, value);
+                
+            }
+            
+        }
 
         if (_data[index].hasOwnProperty(_options.objectKeys.image) && _data[index][_options.objectKeys.image])
             elem.getElementsByClassName('greedSquareBg')[0].style.backgroundImage = 'url(' + _data[index][_options.objectKeys.image] + ')';
@@ -659,6 +683,14 @@ function Greed(containerId, data, options) {
         _initiated = false; // trigger the use of hideIncompleteRow again
         
         _buildGrid();
+        
+    }
+    
+    // sometimes the user may want to manually trigger a resize, since the
+    // resize event isn't automatically triggered if the container is hidden
+    this.resize = function() {
+        
+        _doResize();
         
     }
     

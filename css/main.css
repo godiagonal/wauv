@@ -14,11 +14,21 @@ html {
 body {
     height: 100%;
     min-width: 870px;
-    background: #fafafa;
+    background: #f0f0f0;
     transition: all 0.5s ease;
     font-family: 'Open Sans', 'Sans-serif';
     letter-spacing: 1px;
     font-size: 14px;
+}
+
+body.dark {
+    background: #313131;
+}
+
+svg {
+    position: absolute;
+    min-width: 870px;
+    z-index: 1;
 }
 
 input {
@@ -177,7 +187,7 @@ textarea.error:focus {
     height: 32px;
     width: 32px;
     margin-top: 16px;
-    background-image: url('../images/close3.png');
+    background-image: url('../images/close.png');
     background-repeat: no-repeat;
     background-size: 100%;
     cursor: pointer;
@@ -220,8 +230,12 @@ textarea.error:focus {
             background-image: url(../images/logo_white.png);
         }
 
-        #titleSmall a:hover {
+        #titleSmall a {
             opacity: 0.95;
+        }
+
+        #titleSmall a:hover {
+            opacity: 1;
         }
 
     #titleSmall #logoSmallText {
@@ -408,7 +422,7 @@ textarea.error:focus {
 
 #controls {
     width: 870px;
-    height: 151px;
+    height: 181px;
     margin: 0 auto;
     position: absolute;
     bottom: 0;
@@ -422,8 +436,9 @@ textarea.error:focus {
 
     #controlsWrap {
         width: 700px;
-        height: 100%;
-        margin: 0 auto;
+        height: calc(100% - 30px);
+        margin: 30px auto 0 auto;
+        transition: all 0.3s ease;
     }
 
         #trackInfo {
@@ -431,8 +446,34 @@ textarea.error:focus {
             width: calc(100% - 89px);
             height: calc(100% - 50px);
             padding: 25px;
-            background: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.9);
         }
+
+        body:not(.dark) #trackInfo {
+            background-color: rgba(20, 20, 20, 0.9);
+            color: #fff;
+        }
+
+            #btnToggleControls {
+                position: absolute;
+                margin-top: -50px;
+                margin-left: -25px;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-size: 12px;
+                cursor: pointer;
+                color: #fff;
+                opacity: 0.75;
+                transition: all 0.3 ease;
+            }
+
+            #btnToggleControls:hover {
+                opacity: 1;
+            }
+
+            body:not(.dark) #btnToggleControls {
+                color: #000;
+            }
 
             #trackArt {
                 float: left;
@@ -498,44 +539,43 @@ textarea.error:focus {
                 background-color: rgba(255, 255, 255, 0.75);
             }
 
+            body:not(.dark) #menu .menu-item {
+                background-color: rgba(20, 20, 20, 0.9);
+            }
+
+            body:not(.dark) #menu .menu-item:hover {
+                background-color: rgba(20, 20, 20, 0.75);
+            }
+
             #btnShowTrackSearch {
                 background-image: url('../images/search.png');
             }
 
+            body:not(.dark) #btnShowTrackSearch{
+                background-image: url('../images/search_white.png');
+            }
+
             #btnShowAnimationSettings {
-                background-image: url('../images/bars2.png');
+                background-image: url('../images/bars.png');
+            }
+
+            body:not(.dark) #btnShowAnimationSettings{
+                background-image: url('../images/bars_white.png');
             }
 
             #btnShare {
-                background-image: url('../images/share2.png');
+                background-image: url('../images/share.png');
+            }
+
+            body:not(.dark) #btnShare{
+                background-image: url('../images/share_white.png');
             }
 
             #btnShowAbout {
                 background-image: url('../images/speech.png');
             }
 
+            body:not(.dark) #btnShowAbout{
+                background-image: url('../images/speech_white.png');
+            }
 
-
-svg {
-    position: absolute;
-    min-width: 870px;
-    z-index: 1;
-}
-
-#bars {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    width: 256px;
-    height: 150px;
-	z-index: 8;
-    display: none;
-}
-
-    #bars .bar {
-        position: absolute;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.9);
-        border-top: 2px solid #ed958a;
-        transition: all 0.01s ease;
-    }
