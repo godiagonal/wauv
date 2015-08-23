@@ -23,9 +23,9 @@ You can also use data supplied from the SoundCloud API, such as track comments. 
 
 ### Requirements
 The following requirements have to be met for your animation class to work correctly:
-* A constructor that takes two (or possibly one) arguments; **`audioSource`** and **`options`** (not required but recommended) 1
-* Two public parameterless methods; **`draw()`** and **`destroy()`** 2
-* The canvas or svg element that's going to be drawn on should be added to the DOM as soon as the class is instantiated 3
+1. A constructor that takes two (or possibly one) arguments; **`audioSource`** and **`options`** (not required but recommended)
+2. Two public parameterless methods; **`draw()`** and **`destroy()`**
+3. The canvas or svg element that's going to be drawn on should be added to the DOM as soon as the class is instantiated
 
 **`audioSource`** is an instance of SoundCloudAudioAnalyser that delivers audio frequency data to your animation class. Read more about SoundCloudAudioAnalyser and what data you'll have at your disposal below in the API reference.
 
