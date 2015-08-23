@@ -39,9 +39,9 @@ The **`destroy()`** method will be called when the user choses to display anothe
 The rest we leave to you. You may add as many private methods as you want to keep your code nice and tidy. You can make use of included libraries such as raphael.js and chroma.js to enhance your animations, but try to keep performance in mind. If you want to include a new library please contact us before doing so.
 
 ## Include your animation class in the application
-1. Place your animation class in the javascript/animation folder
-2. Include it with a script tag in (index.html)[index.html]
-3. Add a new object containing info about your class to the animations array in (javascript/animation/classes.js)[javascript/animation/classes.js]
+1. Place your animation class in the **javascript/animation** folder
+2. Include it with a script tag in **index.html**
+3. Add a new object containing info about your class to the animations array in **javascript/animation/classes.js**
 4. Done! Try it out by using the animation style view (ctrl + d)
 
 # API Reference
