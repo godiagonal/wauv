@@ -1,4 +1,4 @@
-# wauv - web audio visualisation
+# wauv - web audio visualiser
 Audio visualisation project using the Web Audio and SoundCloud API. Visit the site at [wauv.it](http://wauv.it).
 
 # Contribute
