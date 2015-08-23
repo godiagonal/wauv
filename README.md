@@ -22,9 +22,10 @@ Currently the following libraries are included and at your disposal:
 You can also use data supplied from the SoundCloud API, such as track comments. If you want to add another library please let us know.
 
 ### Requirements
-* A constructor that takes two (or possibly one) arguments; *audioSource* and *options* (not required but recommended)
-* Two public parameterless methods; draw() and destroy()
-* The canvas or svg that's going to be drawn on should be added to the DOM as soon as the class is instanciated
+The following requirements have to be met for your animation class to work correctly:
+1. A constructor that takes two (or possibly one) arguments; `audioSource` and **options** (not required but recommended)
+2. Two public parameterless methods; **draw()** and **destroy()**
+3. The canvas or svg that's going to be drawn on should be added to the DOM as soon as the class is instantiated
 
 audioSource is an instance of the SoundCloudAudioAnalyser that delivers audio frequency data to your animation class. Read more about SoundCloudAudioAnalyser and what data you'll have at your disposal below.
 
