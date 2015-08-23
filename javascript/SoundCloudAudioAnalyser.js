@@ -3,7 +3,7 @@ function SoundCloudAudioAnalyser(audioElementId, options) {
     // default option values
     var _options = {
         fftSize: 128, // powers of 2, minumum is 32
-        smoothingTimeConstant: 0.94, // range 0-1
+        smoothingTimeConstant: 0.95, // range 0-1
         clientId: '',
         redirectUri: '',
         error: null,
@@ -167,7 +167,7 @@ function SoundCloudAudioAnalyser(audioElementId, options) {
     // send results to callback function
     this.getTracks = function(keyword, callback) {
         
-        SC.get('/tracks', { q: keyword }, function(tracks) {
+        SC.get('/tracks', { q: keyword, limit: 40 }, function(tracks) {
             
             // if we got nothing (null) the request failed
             if (tracks) {

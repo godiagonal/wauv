@@ -9,7 +9,7 @@
 		<meta http-equiv='pragma' content='no-cache'>
         <meta charset="utf-8" />
         
-        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' type='text/css'>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" type="text/css">
         <link rel="stylesheet" href="css/main.css" type="text/css" />
         <link rel="stylesheet" href="css/tooltipster.css" type="text/css" />
         <link rel="stylesheet" href="css/greed.css" type="text/css" />
@@ -19,7 +19,8 @@
         <script src="http://connect.soundcloud.com/sdk.js"></script>
         <script src="javascript/vendor/jquery.tooltipster.min.js"></script>
         <script src="javascript/vendor/bowser.min.js"></script>
-		<script src="javascript/vendor/raphael.js"></script>
+		<script src="javascript/vendor/raphael.min.js"></script>
+		<script src="javascript/vendor/three.min.js"></script>
 		<script src="javascript/vendor/chroma.min.js"></script>
         <script src="javascript/vendor/greed.js"></script>
         
@@ -28,6 +29,7 @@
         
         <!-- Animation classes -->
 		<script src="javascript/animation/CircleVisualiser.js"></script>
+        <script src="javascript/animation/classes.js"></script>
         
         <!-- UI logic script -->
         <script src="javascript/main.js"></script>
@@ -48,7 +50,7 @@
 		<!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
 
 		<!-- Touch Icons - iOS and Android 2.1+ 180x180 pixels in size. --> 
-		<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="images/favicon_152.png">
 
 		<!-- Firefox, Chrome, Safari, IE 11+ and Opera. 196x196 pixels in size. -->
 		<link rel="icon" href="images/favicon.png">
@@ -82,7 +84,7 @@
 
             <div id="title">
 
-                <img id="logo" src="images/logo_grey.png">
+                <img id="logo" src="images/logo_black.png">
 
                 <div id="logoText">
 
@@ -142,7 +144,7 @@
                     We’re developing wauv around the concepts of flexibility and scalability; to be able to implement new visualisation ideas without rewriting the whole shebang. This is made possible by the use of object-oriented JavaScript and some brilliant libraries such as <a href="http://raphaeljs.com/" target="_blank">Raphaël.js</a>. The audio is streamed through <a href="https://soundcloud.com/" target="_blank">SoundCloud</a>, and we’re forever grateful for their awesome API and audio service!
                 </p>
                 <p>
-                    Want to dive in to the code yourself? Have a look at our <a href="https://bitbucket.org/fettavskiljarn/wauv" target="_blank">Bitbucket repo</a>.
+                    Want to dive in to the code yourself? Have a look at our <a href="https://github.com/godiagonal/wauv" target="_blank">GitHub repo</a>.
                 </p>
                 <p>
                     We’re constantly looking for ways to further develop wauv. We welcome anyone who wants to contribute with coding skills or ideas!
@@ -221,7 +223,7 @@
                 
                 <div id="trackInfo">
                     
-                    <a id="btnToggleControls">Hide</a>
+                    <a id="btnToggleControls">Show controls</a>
                     
                     <div id="trackArt"></div>
 

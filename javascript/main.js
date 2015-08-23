@@ -13,30 +13,6 @@ var animFrame,
     searchGrid,
     styleGrid;
 
-var animations = [
-    {
-        name: 'Circles',
-        image: 'images/transparent.png',
-        background: '',
-        init: function() {
-            return new CircleVisualiser(audioSource, {
-                circleCount: 8
-            });
-        }
-    },
-    {
-        name: 'Circles Inverted',
-        image: 'images/transparent.png',
-        background: 'dark',
-        init: function() {
-            return new CircleVisualiser(audioSource, {
-                circleCount: 8,
-                invert: true
-            });
-        }
-    }
-]
-
 $(function() {
     
     // before we do anything, check if the browser is supported
@@ -495,7 +471,7 @@ var toggleControls = function() {
     else {
         
         $('#controlsWrap').css('margin-top', 30);
-        $(this).text('Hide');
+        $(this).text('Hide controls');
         
     }
     

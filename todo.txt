@@ -1,15 +1,6 @@
-göm controls på esc
-
-bg-färg dark för share modal
-
 testa ändra smoothing constant
 
 animationsklass med flera cirklar bredvid varandra
-
-readme på bitbucket
-- hur en animationsklass ska se ut
-- kontakta oss
-- todo
 
 vissa låtar spelas inte
 - t ex: http://localhost/wauv/#flume/seekae-test-recognise-flume-re-work

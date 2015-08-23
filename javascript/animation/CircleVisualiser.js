@@ -38,7 +38,8 @@ function CircleVisualiser(audioSource, options) {
             _paper = Raphael(0, 0, '100%', '100%');
         
         // add a bg rectangle
-        _bg = _paper.rect(-1000, -1000, 4000, 4000);
+        // big of an uggly one to handle viewport resizing
+        _bg = _paper.rect(-1500, -1500, 5000, 5000);
         _bg.attr({ 'stroke-width': 0 });
         
         // added this part for scalability when resizing
@@ -84,10 +85,11 @@ function CircleVisualiser(audioSource, options) {
         
         _circleArr = [];
         
+        // generate initial color scales; one starting scale and one scale to animate to
         _scale = chroma.interpolate.bezier([chroma('#ffffff'), chroma('#ffffff')]);
         _nextScale = _getRandomScale();
         
-        // create new circles
+        // create circles
         for (var i = 0; i < _options.circleCount; i++ ) {
             
             // centered circle with no radius (radius is set by the draw method)
@@ -113,19 +115,17 @@ function CircleVisualiser(audioSource, options) {
         
         for (var i = _circleArr.length-1; i >= 0; i--) {
 
-            // relative amplitude in this frequency interval
+            // relative amplitude in this frequency interval (0-100)
             var amplitude = Math.floor(prevCircleRadius + (data[i] / _maxValue));
             
-            // calculate luminance from amplitude
+            // calculate luminance from amplitude and set constraints
+            // luminance is negatively proportional to amplitude for maximum effect
             if (amplitude > 90)
                 luminance = 0.10;
             else if (amplitude < 20)
                 luminance = 0.8;
             else
                 luminance = 1 - amplitude / 100;
-            
-            // select circle and update its radius
-            var circle = _circleArr[i];
             
             // create a scale between this and the next color scale
             var color = _scale(i/_options.circleCount);
@@ -144,9 +144,9 @@ function CircleVisualiser(audioSource, options) {
             prevCircleRadius = circleRadius;
             
             // update circle
-            circle.attr({ r: circleRadius, fill: newColor.hex() });
+            _circleArr[i].attr({ r: circleRadius, fill: newColor.hex() });
             
-            // update bg
+            // update bg to same color as outermost circle
             if (!_options.invert) {
                 if (i == 0)
                     _bg.attr('fill', newColor.luminance(0.8).hex());
@@ -159,6 +159,7 @@ function CircleVisualiser(audioSource, options) {
         
         _renderCount++;
         
+        // init transition to next color scale
         if (_renderCount > _options.speed) {
             _renderCount = 0;
             _scale = _nextScale;
