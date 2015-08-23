@@ -1,10 +1,8 @@
-# wauv
-Audio visualisation project using the Web Audio and SoundCloud API
+# wauv - web audio visualisation
+Audio visualisation project using the Web Audio and SoundCloud API. The live site is available at [wauv.it](http://wauv.it).
 
 # Contribute
 If you're a developer and feel like making your own visualisations we welcome you to fork the project and give it a go! All contributions are appreciated.
-
-Please use [CircleVisualiser.js](javascript/animation/CircleVisualiser.js) as an reference and guideline for constructing your own animation classes.
 
 1. Fork the project
 2. Create an animation class
@@ -12,6 +10,8 @@ Please use [CircleVisualiser.js](javascript/animation/CircleVisualiser.js) as an
 4. Create a pull request
 
 ## Create an animation class
+Please use [CircleVisualiser.js](javascript/animation/CircleVisualiser.js) as an reference and guideline for constructing your own animation classes.
+
 Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class ([SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), see API reference below).
 
 Currently the following libraries are included and at your disposal:
@@ -22,7 +22,7 @@ Currently the following libraries are included and at your disposal:
 You can also use data supplied from the SoundCloud API, such as track comments. If you want to add another library please let us know.
 
 ### Requirements
-* A constructor that takes two (or possibly one) arguments; audioSource and options (not required but recommended)
+* A constructor that takes two (or possibly one) arguments; *audioSource* and *options* (not required but recommended)
 * Two public parameterless methods; draw() and destroy()
 * The canvas or svg that's going to be drawn on should be added to the DOM as soon as the class is instanciated
 
