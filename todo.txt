@@ -1,3 +1,9 @@
+göm controls på esc
+
+bg-färg dark för share modal
+
+testa ändra smoothing constant
+
 animationsklass med flera cirklar bredvid varandra
 
 readme på bitbucket
