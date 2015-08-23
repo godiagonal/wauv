@@ -47,6 +47,10 @@ The rest we leave to you. You may add as many private methods as you want to kee
 # API Reference
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
+Coming shortlyyy
+
 # Contact us
-Samuel Johansson - samueljohanssonhue@gmail.com
-Lukas Peterson - lukasopeterson@gmail.com
+Got questions or feedback? You can reach us at:
+
+* Samuel Johansson - samueljohanssonhue@gmail.com
+* Lukas Peterson - lukasopeterson@gmail.com
