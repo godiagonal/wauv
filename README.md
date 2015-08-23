@@ -12,7 +12,7 @@ Please use [CircleVisualiser.js](javascript/animation/CircleVisualiser.js) as an
 4. Create a pull request
 
 ## Create an animation class
-Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantified data through an audio analyser class ([SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), see API reference below).
+Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class ([SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), see API reference below).
 
 Currently the following libraries are included and at your disposal:
 * three.js (3D rendering)
