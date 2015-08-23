@@ -1,5 +1,5 @@
 # wauv - web audio visualisation
-Audio visualisation project using the Web Audio and SoundCloud API. The live site is available at [wauv.it](http://wauv.it).
+Audio visualisation project using the Web Audio and SoundCloud API. Visit the site at [wauv.it](http://wauv.it).
 
 # Contribute
 If you're a developer and feel like making your own visualisations we welcome you to fork the project and give it a go! All contributions are appreciated.
