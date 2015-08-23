@@ -23,13 +23,13 @@ You can also use data supplied from the SoundCloud API, such as track comments. 
 
 ### Requirements
 The following requirements have to be met for your animation class to work correctly:
-* A constructor that takes two (or possibly one) arguments; **`audioSource`** and **`options`** (not required but recommended)
-* Two public parameterless methods; **`draw()`** and **`destroy()`**
-* The canvas or svg element that's going to be drawn on should be added to the DOM as soon as the class is instantiated
+* A constructor that takes two (or possibly one) arguments; **`audioSource`** and **`options`** (not required but recommended) 1
+* Two public parameterless methods; **`draw()`** and **`destroy()`** 2
+* The canvas or svg element that's going to be drawn on should be added to the DOM as soon as the class is instantiated 3
 
 **`audioSource`** is an instance of SoundCloudAudioAnalyser that delivers audio frequency data to your animation class. Read more about SoundCloudAudioAnalyser and what data you'll have at your disposal below in the API reference.
 
-**`options`** is an object containing properties that affect the behaviour of your animation. This can be left out if you're not in need of any options for your animations. Keep in mind that you might want to have a private variable in you class containing default values for these options.
+**`options`** is an object containing properties that affect the behaviour of your animation. Keep in mind that you might want to have a private variable in you class containing default values for these options.
 
 The **`draw()`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your draw method use audioSource.getFrequencyDataBySize(n) which returns an array containing n frequency intervals with an amplitude value for each interval. n has to be a power of two! Now it's up to you to use the data and make some canvas or svg magic!
 
