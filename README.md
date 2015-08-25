@@ -12,14 +12,14 @@ If you're a developer and feel like making your own visualisations we welcome yo
 ## Create an animation class
 Please use [CircleVisualiser.js](javascript/animation/CircleVisualiser.js) as an reference and guideline for constructing your own animation classes.
 
-Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class ([SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), API reference below).
+Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class; [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), API reference below.
 
 Currently the following libraries are included and at your disposal:
 * three.js (3D rendering)
 * raphael.js (simplified svg rendering)
 * chroma.js (easy handling of colors and color scales)
 
-You can also use data supplied from the SoundCloud API, such as track comments. If you want to add another library please let us know.
+If you want to add another library please let us know. You can also use data supplied from the SoundCloud API, such as track comments.
 
 ### Requirements
 The following requirements have to be met for your animation class to work correctly:
@@ -32,7 +32,7 @@ The following requirements have to be met for your animation class to work corre
 
 **`options`** is an object containing properties that affect the behaviour of your animation. Keep in mind that you might want to have a private variable in you class containing default values for these options.
 
-The **`draw()`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw()` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic!
+The **`draw()`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw()` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic.
 
 The **`destroy()`** method will be called when the user choses to display another animation class. This method has to discard DOM elements and other stuff that your class has created. Avoid memory leaks!
 
@@ -47,7 +47,7 @@ The rest we leave to you. You may add as many private methods as you want to kee
 # API Reference
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
-Coming shortlyyy
+**Coming shortlyyy**
 
 # Contact us
 Got questions or feedback? You can reach us at:
