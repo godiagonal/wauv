@@ -1,4 +1,4 @@
-function BarVisualiser(audioSource, barCount, containerElementId) {
+function Bars(audioSource, barCount, containerElementId) {
     
     var self = this;
     

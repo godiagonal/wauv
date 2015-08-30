@@ -1,4 +1,4 @@
-function CircleVisualiser(audioSource, options) {
+function Speaker(audioSource, options) {
     
     var _options = {
         containerId: null,

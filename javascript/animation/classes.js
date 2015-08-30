@@ -1,22 +1,31 @@
 var animations = [
     {
-        name: 'Circles',
+        name: 'Sonar',
         image: 'images/transparent.png',
-        background: '',
+        background: 'dark',
         init: function() {
-            return new CircleVisualiser(audioSource, {
+            return new Sonar(audioSource, {
                 circleCount: 8
             });
         }
     },
     {
-        name: 'Circles Inverted',
+        name: 'Ripples',
         image: 'images/transparent.png',
         background: 'dark',
         init: function() {
-            return new CircleVisualiser(audioSource, {
-                circleCount: 8,
-                invert: true
+            return new Ripples(audioSource, {
+                circleCount: 8
+            });
+        }
+    },
+    {
+        name: 'Speaker',
+        image: 'images/transparent.png',
+        background: '',
+        init: function() {
+            return new Speaker(audioSource, {
+                circleCount: 8
             });
         }
     }
