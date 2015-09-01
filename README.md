@@ -36,10 +36,16 @@ The **`draw`** method will be called roughly 60 times per second and tells your 
 
 The **`destroy`** method will be called when the user choses to display another animation class. This method has to discard DOM elements and other stuff that your class has created. Avoid memory leaks!
 
+To summarize:
 ```javascript
 function MyAnimation(audioSource, options) {
   
   // Everything in your animation class goes here
+  
+  var init = function() {
+    // Create canvas or svg and add to the DOM
+    // Setup options with default values and do other initiation stuff
+  }();
   
   this.draw = function() {
     // Do animation stuff
