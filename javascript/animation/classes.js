@@ -2,7 +2,7 @@ var animations = [
     {
         name: 'Sonar',
         slug: 'sonar',
-        image: 'images/transparent.png',
+        image: 'images/animation/sonar.png',
         background: 'dark',
         init: function() {
             return new Sonar(audioSource, {
@@ -13,7 +13,7 @@ var animations = [
     {
         name: 'Ripples',
         slug: 'ripples',
-        image: 'images/transparent.png',
+        image: 'images/animation/ripples.png',
         background: 'dark',
         init: function() {
             return new Ripples(audioSource, {
@@ -24,7 +24,7 @@ var animations = [
     {
         name: 'Speaker',
         slug: 'speaker',
-        image: 'images/transparent.png',
+        image: 'images/animation/speaker.png',
         background: '',
         init: function() {
             return new Speaker(audioSource, {
