@@ -27,19 +27,28 @@ The following requirements have to be met for your animation class to work corre
 1. A constructor that takes two (or possibly one) arguments; `audioSource` and `options` (not required but recommended)
 ```javascript
 function MyAnimation(audioSource, options) {
-  // Everything in your class goes in here
+  // Everything in your animation class goes here
 }
 ```
-2. Two public parameterless methods; `draw()` and `destroy()`
+2. Two public parameterless methods; `draw` and `destroy`
+```javascript
+this.draw = function() {
+  // Do animation stuff
+}
+
+this.destroy = function() {
+  // Do clean-up stuff
+}
+```
 3. The canvas or svg element that's going to be drawn on should be added to the DOM as soon as the class is instantiated
 
 **`audioSource`** is an instance of SoundCloudAudioAnalyser that delivers audio frequency data to your animation class. Read more about SoundCloudAudioAnalyser and what data you'll have at your disposal below in the API reference.
 
 **`options`** is an object containing properties that affect the behaviour of your animation. Keep in mind that you might want to have a private variable in you class containing default values for these options.
 
-The **`draw()`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw()` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic.
+The **`draw`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw()` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic.
 
-The **`destroy()`** method will be called when the user choses to display another animation class. This method has to discard DOM elements and other stuff that your class has created. Avoid memory leaks!
+The **`destroy`** method will be called when the user choses to display another animation class. This method has to discard DOM elements and other stuff that your class has created. Avoid memory leaks!
 
 The rest we leave to you. You may add as many private methods as you want to keep your code nice and tidy. You can make use of included libraries such as raphael.js and chroma.js to enhance your animations, but try to keep performance in mind. If you want to include a new library please contact us before doing so.
 
