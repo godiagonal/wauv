@@ -68,26 +68,57 @@ This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudA
 Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see frequencyMaxValue) which represents the avarage amplitude in that interval.
 ```javascript
 var data = this.getFrequencyData();
-for (var i = 0; i < data.length; i++) {
-    console.log('Interval #' + i + ' has a relative amplitude of ' data[i]);
-}
-```
 
-## getFrequencyData()
-Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see frequencyMaxValue) which represents the avarage amplitude in that interval.
-```javascript
-var data = audioSource.getFrequencyData();
 for (var i = 0; i < data.length; i++) {
-    console.log('Interval #' + i + ' has a relative amplitude of ' data[i]);
+  // This will give you an amplitude value between 0 and 255
+  console.log(data[i]);
 }
 ```
 
 ## getFrequencyDataBySize(size)
 Same as getFrequencyData but with custom size. The size has to be a power of two for now.
 ```javascript
+// This array will contain 8 items with amplitude values
 var data = audioSource.getFrequencyDataBySize(8);
 ```
 
+## frequencyMaxValue
+**Read only.** The highest possible value of item in frequency data. This is normally 255, but may be changed in the future to provide more accurate amplitude readings.
+```javascript
+var maxValue = audioSource.frequencyMaxValue;
+var data = audioSource.getFrequencyDataBySize(8);
+
+for (var i = 0; i < data.length; i++) {
+    // This will give you a amplitude value between 0 and 1 which you can use in your animations
+    var amplitude = data / maxValue;
+}
+```
+
+## smoothingTimeConstant
+The degree of smoothing over time that should be applied to values returned by getFrequencyData(). The value may range from 0 to 1 and the default value is 0.95. Higher values means smoother transitions between low and high amplitude values, vice-versa.
+```javascript
+audioSource.smoothingTimeConstant = 0.95;
+```
+
+## fftSize
+The FFT size to use when analysing audio, see https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize. The value has to be a power of two and at least 32. Default is 128.
+```javascript
+audioSource.fftSize = 128;
+```
+
+## frequencyBinCount
+**Read only.** The number of items in the array returned by getFrequencyData(). This is always fftSize divided by two.
+```javascript
+var maxValue = audioSource.frequencyBinCount;
+```
+
+## currentTrack
+Object containing about the currently playing track. See https://developers.soundcloud.com/docs/api/reference#tracks.
+```javascript
+var track = audioSource.currentTrack;
+
+console.log('Now playing ' + track.title + ' by ' + track.user.username);
+```
 
 
 # Contact us
