@@ -113,7 +113,7 @@ var maxValue = audioSource.frequencyBinCount;
 ```
 
 ## currentTrack
-Object containing about the currently playing track. See https://developers.soundcloud.com/docs/api/reference#tracks.
+Object containing info about the currently playing track. See https://developers.soundcloud.com/docs/api/reference#tracks.
 ```javascript
 var track = audioSource.currentTrack;
 
