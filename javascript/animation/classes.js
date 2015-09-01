@@ -1,6 +1,7 @@
 var animations = [
     {
         name: 'Sonar',
+        slug: 'sonar',
         image: 'images/transparent.png',
         background: 'dark',
         init: function() {
@@ -11,6 +12,7 @@ var animations = [
     },
     {
         name: 'Ripples',
+        slug: 'ripples',
         image: 'images/transparent.png',
         background: 'dark',
         init: function() {
@@ -21,6 +23,7 @@ var animations = [
     },
     {
         name: 'Speaker',
+        slug: 'speaker',
         image: 'images/transparent.png',
         background: '',
         init: function() {

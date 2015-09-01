@@ -19,7 +19,7 @@ Currently the following libraries are included and at your disposal:
 * raphael.js (simplified svg rendering)
 * chroma.js (easy handling of colors and color scales)
 
-If you want to add another library please let us know. You can also use data supplied from the SoundCloud API, such as track comments.
+If you want to add another library please let us know.
 
 ### Requirements
 The following requirements have to be met for your animation class to work correctly:
@@ -47,7 +47,7 @@ The rest we leave to you. You may add as many private methods as you want to kee
 # API Reference
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
-**Coming shortlyyy**
+**Coming shortly**
 
 # Contact us
 Got questions or feedback? You can reach us at:

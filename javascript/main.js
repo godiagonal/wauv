@@ -44,10 +44,6 @@ $(function() {
         minSize: 150
     });
     
-    // init default animation class
-    currentAnimation = animations[0];
-    currentAnimation.instance = currentAnimation.init();
-    
     $('#track').on('play', playAudio);
     $('#track').on('pause', pauseAudio);
 	$('#txtSearch').on('keyup', searchEvents);
@@ -60,13 +56,14 @@ $(function() {
     $('#txtShare').on('focus', selectText);
     $('#btnFeedbackSubmit').on('click', sendFeedback);
     $('#btnToggleControls').on('click', toggleControls);
+    $('#btnToggleFullScreen').on('click', toggleFullScreen);
 	$(window).on('keyup', audioEvents);
     $(window).on('keydown', displayEvents);
     
     resultContainer = $('#resultContainer');
     keywordElem =  $('#txtSearch');
 	
-    // check for track info in url
+    // check for track and animation info in url
     checkHash();
     
     // init tooltips
@@ -177,12 +174,37 @@ var showResults = function(tracks) {
 
 /* ----------- START track selection functionality ----------- */
 
-// play track from url if artist/track is provided after # (hashtag)
+// automatically set animation class and play track from url if
+// animation/artist/track is provided after # (hashtag)
 var checkHash = function() {
     
-    if (location.hash.length) {
-        var url = 'https://soundcloud.com/' + location.hash.substr(1);
-        setAudio(url);
+    var hash = location.hash.substr(1);
+    var parts = hash.split('/');
+    
+    if (parts.length > 0) {
+        
+        // init animation class from url
+        for (var i = 0; i < animations.length; i++) {
+            if (animations[i].slug == parts[0]) {
+                currentAnimation = animations[i];
+                currentAnimation.instance = currentAnimation.init();
+            }
+        }
+        
+        // set track from url
+        if (parts.length > 2) {
+            var url = 'https://soundcloud.com/' + parts[1] + '/' + parts[2];
+            setAudio(url);
+        }
+        
+    }
+    
+    if (!currentAnimation) {
+        
+        // init default animation class
+        currentAnimation = animations[0];
+        currentAnimation.instance = currentAnimation.init();
+        
     }
     
 }
@@ -218,7 +240,7 @@ var setTrackInfo = function(track) {
         document.getElementById('trackArt').style.backgroundImage = 'linear-gradient(135deg, #89b0bc, #ac898d)';
     
     // update hash part of url to create a shareable link
-    location.hash = '#' + track.user.permalink + '/' + track.permalink;
+    location.hash = '#' + currentAnimation.slug + '/' + track.user.permalink + '/' + track.permalink;
     
     showControls();
     playAudio();
@@ -292,6 +314,17 @@ var displayEvents = function(e) {
             
             else if ($('#controls').is(':hidden'))
                 showControls();
+            
+        }
+
+        // ctrl / cmd + enter to toggle full screen
+        else if ((e.ctrlKey || e.metaKey) && keyCode == 13) {
+
+            
+            toggleFullScreen();
+            
+            e.preventDefault();
+            return false;
 
         }
 
@@ -368,12 +401,14 @@ var showControls = function() {
     
     // change bg and logo color depending on current animation
     $('body').removeClass();
-    $('#titleSmall').removeClass('inverted');
+    $('#sideBar').removeClass('inverted');
+    $('#menu').removeClass('inverted');
     
     switch (currentAnimation.background)
     {
         case 'dark':
-            $('#titleSmall').addClass('inverted');
+            $('#sideBar').addClass('inverted');
+            $('#menu').addClass('inverted');
             $('body').addClass('dark');
             break;
     }
@@ -411,8 +446,9 @@ var initSearchArea = function() {
     // hide title
     $('#title:visible').hide();
     
-    // show small title
-    $('#titleSmall').css({ opacity: 1 });
+    // show small title and menu
+    $('#sideBar').css({ opacity: 1 });
+    $('#menu').css({ opacity: 1 });
     
 }
 
@@ -442,6 +478,7 @@ var showOverlayPage = function(pageId) {
         switch (pageId) { 
             case '#trackSearch':
                 $('#txtSearch').focus();
+                searchGrid.resize();
                 searchGrid.keyEventsEnabled = true; // enable grid events
                 break;
             case '#animationSettings':
@@ -450,7 +487,8 @@ var showOverlayPage = function(pageId) {
                 break;
         }
         
-        $('#titleSmall').removeClass('inverted');
+        $('#sideBar').removeClass('inverted');
+        $('#menu').removeClass('inverted');
         
     });
     
@@ -463,7 +501,7 @@ var toggleControls = function() {
     if ($('#controlsWrap').css('margin-top') == '30px') {
         
         $('#controlsWrap').css('margin-top', $('#controlsWrap').innerHeight() + 30);
-        $(this).text('Show controls');
+        $(this).text('Show track info');
         
     }
     
@@ -471,7 +509,7 @@ var toggleControls = function() {
     else {
         
         $('#controlsWrap').css('margin-top', 30);
-        $(this).text('Hide controls');
+        $(this).text('Hide track info');
         
     }
     
@@ -567,6 +605,30 @@ var sendFeedback = function() {
     
 }
 
+// turn full screen mode on and off
+var toggleFullScreen = function() {
+    
+    var isFullScreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    
+    if (isFullScreen) {
+        if (document.exitFullScreen) {
+            document.exitFullScreen();
+        }
+        else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+        else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }
+    }
+    else {
+        var doc = document.documentElement;
+        var rfs = doc.requestFullScreen || doc.webkitRequestFullScreen || doc.mozRequestFullScreen;
+        rfs.call(doc);
+    }
+    
+}
+
 /* ----------- END display logic ----------- */
 
 /* ----------- START animation functionality ----------- */
@@ -583,6 +645,15 @@ var setAnimation = function(animation) {
     // and add the new one
     currentAnimation = animation;
     currentAnimation.instance = currentAnimation.init();
+    
+    // update current animation in url
+    var hash = location.hash.substr(1);
+    var parts = hash.split('/');
+    
+    if (parts.length > 0)
+        parts[0] = currentAnimation.slug;
+    
+    location.hash = '#' + parts.join('/');
     
     // finally go back to playback view
     showControls();

@@ -34,7 +34,7 @@ function Ripples(audioSource, options) {
         // added this part for scalability when resizing
         _paper.setViewBox(0, 0, _width, _height, true);
 		
-		_maxRadius = _width / _options.circleCount / 2;
+		_maxRadius = _width / (_options.circleCount - 3) / 2;
         _maxValue = audioSource.frequencyMaxValue;
         _renderCircleCount = 0;
         _renderScaleCount = 0;
@@ -73,39 +73,38 @@ function Ripples(audioSource, options) {
         rightyCount = 1;
         
         // create circles
-        for (var i = 0; i < _options.circleCount - 2; i++ ) {
+        for (var i = 0; i < _options.circleCount - 3; i++ ) {
             
             var circle = {};
             
             var x = _width / 2;
             
-            if (leftyCount <= rightyCount) {
+            // center first circle, alternate others left/right
+            if (i > 0) {
                 
-                circle.position = 'left';
-                
-                if (i > 1)
+                if (leftyCount <= rightyCount) {
+
+                    circle.position = 'left';
+
                     x -= leftyCount * _maxRadius * 2;
-                else
-                    x -= leftyCount * _maxRadius * 1.3;
-                
-                leftyCount++;
-                
-            }
-            else {
-                
-                circle.position = 'right';
-                
-                if (i > 1)
+
+                    leftyCount++;
+
+                }
+                else {
+
+                    circle.position = 'right';
+
                     x += rightyCount * _maxRadius * 2;
-                else
-                    x += rightyCount * _maxRadius * 1.3;
-                
-                rightyCount++;
+
+                    rightyCount++;
+
+                }
                 
             }
             
 			circle.element = _paper.circle(x, _height / 2, 0);
-            circle.element.attr({ 'stroke-width': 0, fill: '#e85f5f', opacity: 0.5 });
+            circle.element.attr({ 'stroke-width': 0, stroke: '#fff', fill: '#e85f5f', opacity: 0.5 });
 
             circle.fadeQueue = [];
             
@@ -130,11 +129,11 @@ function Ripples(audioSource, options) {
             var color = _scale(i / _circles.length);
             var nextColor = _nextScale(i / _circles.length);
             var scale = chroma.interpolate.bezier([color, nextColor]);
-            var newColor = scale(_renderScaleCount / _scaleSpeed).luminance(amplitude);
+            var newColor = scale(_renderScaleCount / _scaleSpeed);
             
             var radius = Math.floor(amplitude * _maxRadius);
 
-            _circles[i].element.attr({ r: radius, opacity: amplitude - 0.2, fill: newColor.hex() });
+            _circles[i].element.attr({ r: radius, opacity: amplitude - 0.2, fill: newColor.luminance(amplitude).hex() });
             
             if (_renderCircleCount == 0 && amplitude > 0.4) {
                 
@@ -145,7 +144,7 @@ function Ripples(audioSource, options) {
                 };
                 
                 circle.element = _paper.circle(_circles[i].element.attr('cx'), _circles[i].element.attr('cy'), radius);
-                circle.element.attr({ 'stroke-width': 0, fill: newColor.hex(), opacity: 0.1 });
+                circle.element.attr({ 'stroke-width': 0, fill: newColor.luminance(amplitude - 0.1).hex(), opacity: 0.2 });
                 circle.element.toBack();
                 
                 _circles[i].fadeQueue.push(circle);
@@ -176,7 +175,8 @@ function Ripples(audioSource, options) {
         _circleSpeed = 60 * avgAmplitude;
         _scaleSpeed = 300;
           
-        //console.log(speed);
+        if (_circleSpeed < 30)
+            _circleSpeed = 30;
         
         _renderCircleCount++;
         _renderScaleCount++;
