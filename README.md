@@ -65,7 +65,7 @@ The rest we leave to you. You may add as many private methods as you want to kee
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
 ## getFrequencyData()
-Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see `frequencyMaxValue`) which represents the avarage amplitude in that interval.
+Returns array with quantified frequency data that can be used for animating. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see `frequencyMaxValue`) which represents the avarage amplitude in that interval.
 ```javascript
 var data = this.getFrequencyData();
 
