@@ -76,7 +76,7 @@ for (var i = 0; i < data.length; i++) {
 ```
 
 ## getFrequencyDataBySize(size)
-Same as getFrequencyData but with custom size. The size has to be a power of two for now.
+Same as `getFrequencyData()` but with custom size. The size has to be a power of two for now.
 ```javascript
 // This array will contain 8 items with amplitude values
 var data = audioSource.getFrequencyDataBySize(8);
