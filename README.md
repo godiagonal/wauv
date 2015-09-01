@@ -65,7 +65,7 @@ The rest we leave to you. You may add as many private methods as you want to kee
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
 ## getFrequencyData()
-Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see frequencyMaxValue) which represents the avarage amplitude in that interval.
+Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see `frequencyMaxValue`) which represents the avarage amplitude in that interval.
 ```javascript
 var data = this.getFrequencyData();
 
@@ -95,7 +95,7 @@ for (var i = 0; i < data.length; i++) {
 ```
 
 ## smoothingTimeConstant
-The degree of smoothing over time that should be applied to values returned by getFrequencyData(). The value may range from 0 to 1 and the default value is 0.95. Higher values means smoother transitions between low and high amplitude values, vice-versa.
+The degree of smoothing over time that should be applied to values returned by `getFrequencyData()` and `getFrequencyDataBySize(size)`. The value may range from 0 to 1 and the default value is 0.95. Higher values means smoother transitions between low and high amplitude values, vice-versa.
 ```javascript
 audioSource.smoothingTimeConstant = 0.95;
 ```
@@ -107,7 +107,7 @@ audioSource.fftSize = 128;
 ```
 
 ## frequencyBinCount
-**Read only.** The number of items in the array returned by getFrequencyData(). This is always fftSize divided by two.
+**Read only.** The number of items in the array returned by `getFrequencyData()` and `getFrequencyDataBySize(size)`. This is always fftSize divided by two.
 ```javascript
 var maxValue = audioSource.frequencyBinCount;
 ```
