@@ -11,11 +11,9 @@ function Sonar(audioSource, options) {
         _nextScale,
         _maxValue,
 		_maxRadius,
-		_maxStrokeWidth,
 		_height,
 		_width,
 		_paper,
-        _bg,
         _renderCircleCount,
         _renderScaleCount,
         _circleSpeed,
@@ -29,10 +27,7 @@ function Sonar(audioSource, options) {
         _height = 400;
 		_width = 800;
 		
-        // create canvas
         _paper = Raphael(0, 0, '100%', '100%');
-        
-        // added this part for scalability when resizing
         _paper.setViewBox(0, 0, _width, _height, true);
 		
 		_maxRadius = _width / _options.circleCount / 2;
@@ -56,14 +51,12 @@ function Sonar(audioSource, options) {
         
     }
     
-    // returns a random chroma.js color scale
     var _getRandomScale = function() {
         
         return chroma.interpolate.bezier([chroma.random().desaturate(), chroma.random().desaturate()]);
         
     }
     
-    // create elements for circles to be animated
     var _initCircles = function() {
         
         _scale = _getRandomScale();
@@ -73,7 +66,6 @@ function Sonar(audioSource, options) {
         leftyCount = 1;
         rightyCount = 1;
         
-        // create circles
         for (var i = 0; i < _options.circleCount - 2; i++ ) {
             
             var circle = {};
@@ -118,7 +110,6 @@ function Sonar(audioSource, options) {
     
     this.draw = function() {
         
-        // get frequency intervals
         var data = audioSource.getFrequencyDataBySize(_options.circleCount);
         
         var totalAmplitude = 0;
@@ -194,9 +185,9 @@ function Sonar(audioSource, options) {
     
     }
     
-    // remove canvas from DOM
     this.destroy = function() {
         
+        _circles = [];
         _paper.remove();
         
     }

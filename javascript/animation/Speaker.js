@@ -1,5 +1,6 @@
 function Speaker(audioSource, options) {
     
+    // default option values
     var _options = {
         containerId: null,
         circleCount: 8, // has to be a power of 2
@@ -54,6 +55,7 @@ function Speaker(audioSource, options) {
         // highest possible value of position in frequencyData
         _maxValue = audioSource.frequencyMaxValue;
         
+        // this is used to time when to start transitioning to the next color scale
         _renderCount = 0;
         
         _initCircles();
@@ -171,6 +173,7 @@ function Speaker(audioSource, options) {
     // remove canvas from DOM
     this.destroy = function() {
         
+        _circleArr = [];
         _paper.remove();
         
     }
