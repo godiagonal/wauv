@@ -42,10 +42,10 @@ function MyAnimation(audioSource, options) {
   
   // Everything in your animation class goes here
   
-  var init = function() {
+  var _init = function() {
     // Create canvas or svg and add to the DOM
     // Setup options with default values and do other initiation stuff
-  }();
+  }
   
   this.draw = function() {
     // Do animation stuff
@@ -54,6 +54,8 @@ function MyAnimation(audioSource, options) {
   this.destroy = function() {
     // Do clean-up stuff
   }
+  
+  _init();
   
 }
 
