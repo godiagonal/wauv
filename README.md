@@ -38,6 +38,7 @@ The **`destroy`** method will be called when the user choses to display another 
 
 ```javascript
 function MyAnimation(audioSource, options) {
+  
   // Everything in your animation class goes here
   
   this.draw = function() {
@@ -47,6 +48,7 @@ function MyAnimation(audioSource, options) {
   this.destroy = function() {
     // Do clean-up stuff
   }
+  
 }
 
 ```
@@ -62,7 +64,31 @@ The rest we leave to you. You may add as many private methods as you want to kee
 # API Reference
 This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
-**Coming shortly**
+## getFrequencyData()
+Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see frequencyMaxValue) which represents the avarage amplitude in that interval.
+```javascript
+var data = this.getFrequencyData();
+for (var i = 0; i < data.length; i++) {
+    console.log('Interval #' + i + ' has a relative amplitude of ' data[i]);
+}
+```
+
+## getFrequencyData()
+Returns array with quantified frequency data that can be used for animations. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see frequencyMaxValue) which represents the avarage amplitude in that interval.
+```javascript
+var data = audioSource.getFrequencyData();
+for (var i = 0; i < data.length; i++) {
+    console.log('Interval #' + i + ' has a relative amplitude of ' data[i]);
+}
+```
+
+## getFrequencyDataBySize(size)
+Same as getFrequencyData but with custom size. The size has to be a power of two for now.
+```javascript
+var data = audioSource.getFrequencyDataBySize(8);
+```
+
+
 
 # Contact us
 Got questions or feedback? You can reach us at:
