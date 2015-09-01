@@ -90,7 +90,8 @@ var data = audioSource.getFrequencyDataBySize(8);
 
 for (var i = 0; i < data.length; i++) {
     // This will give you a amplitude value between 0 and 1 which you can use in your animations
-    var amplitude = data / maxValue;
+    var amplitude = data[i] / maxValue;
+    console.log(amplitude);
 }
 ```
 
@@ -109,7 +110,7 @@ audioSource.fftSize = 128;
 ## frequencyBinCount
 **Read only.** The number of items in the array returned by `getFrequencyData()` and `getFrequencyDataBySize(size)`. This is always fftSize divided by two.
 ```javascript
-var maxValue = audioSource.frequencyBinCount;
+var count = audioSource.frequencyBinCount;
 ```
 
 ## currentTrack
