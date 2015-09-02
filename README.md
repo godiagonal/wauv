@@ -116,7 +116,7 @@ audioSource.fftSize = 128;
 ```
 
 ## frequencyBinCount
-**Read only.** The number of items in the array returned by `getFrequencyData()` and `getFrequencyDataBySize(size)`. This is always fftSize divided by two.
+**Read only.** The number of items in the array returned by `getFrequencyData()`. This is always fftSize divided by two.
 ```javascript
 var count = audioSource.frequencyBinCount;
 ```
