@@ -110,7 +110,7 @@ audioSource.smoothingTimeConstant = 0.95;
 ```
 
 ## fftSize
-The FFT size to use when analysing audio, this could be seen as the sample rate on the frequency domain. The value has to be a power of two and at least 32. Default is 128. For more info see https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize.
+The FFT size to use when analysing audio, this could be seen as the sample rate of the frequency domain. The value has to be a power of two and at least 32. Default is 128. For more info see https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize.
 ```javascript
 audioSource.fftSize = 128;
 ```
