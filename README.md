@@ -32,7 +32,7 @@ The following requirements have to be met for your animation class to work corre
 
 **`options`** is an object containing properties that affect the behaviour of your animation. Keep in mind that you might want to have a private variable in you class containing default values for these options.
 
-The **`draw`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw()` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic.
+The **`draw`** method will be called roughly 60 times per second and tells your animation class that it's time to render a new frame. To access the current audio frequency data from your `draw` method use `audioSource.getFrequencyDataBySize(n)` which returns an array containing `n` number of frequency intervals with an amplitude value for each interval. **`n` has to be a power of two!** Now it's up to you to use the data and make some canvas or svg magic.
 
 The **`destroy`** method will be called when the user choses to display another animation class. This method has to discard DOM elements and other stuff that your class has created. Avoid memory leaks!
 
