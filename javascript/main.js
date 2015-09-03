@@ -44,6 +44,8 @@ $(function() {
         minSize: 150
     });
     
+    styleGrid.keyEventsEnabled = false;
+    
     $('#track').on('play', playAudio);
     $('#track').on('pause', pauseAudio);
 	$('#txtSearch').on('keyup', searchEvents);
