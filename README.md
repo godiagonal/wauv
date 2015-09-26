@@ -75,7 +75,7 @@ This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudA
 ## getFrequencyData()
 Returns array with quantified frequency data that can be used for animating. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see `frequencyMaxValue`) which represents the avarage amplitude in that interval.
 ```javascript
-var data = this.getFrequencyData();
+var data = audioSource.getFrequencyData();
 
 for (var i = 0; i < data.length; i++) {
   // This will give you an amplitude value between 0 and 255
