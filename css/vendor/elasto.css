@@ -1,0 +1,77 @@
+/* Container */
+.elasto-container:after {
+  /* Don't change this */
+  content: '';
+  /* Don't change this */
+  display: table;
+  /* Don't change this */
+  clear: both;
+}
+
+/* Square */
+.elasto-container .elasto-square {
+  /* Don't change this */
+  position: relative;
+  /* Don't change this */
+  float: left;
+}
+
+/* Square background */
+.elasto-container .elasto-square-bg {
+  /* Don't change this unless necessary */
+  z-index: -1;
+  /* Don't change this */
+  position: absolute;
+  /* Don't change this */
+  background-repeat: no-repeat;
+  /* Don't change this */
+  background-size: cover;
+  /* This dictates the coverage area of the bg */
+  width: calc(100% - 10px);
+  /* This dictates the coverage area of the bg */
+  height: calc(100% - 10px);
+  /* This dictates the coverage area of the bg */
+  margin: 5px;
+  background-image: linear-gradient(135deg, #a29495, #ad6d61);
+  opacity: 0.7;
+}
+
+/* Square text overlay */
+.elasto-container .elasto-square-wrap {
+  /* Don't change this */
+  position: absolute;
+  /* This could be removed if you want the text overlay in the top */
+  bottom: 0;
+  width: calc(100% - 30px);
+  margin: 5px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.elasto-container .elasto-square-title {
+  font-weight: bold;
+}
+
+/* Square background when active */
+.elasto-container .elasto-square.active .elasto-square-bg,
+.elasto-container .elasto-square.active:hover .elasto-square-bg {
+  opacity: 1;
+}
+
+/* Square text overlay when active */
+.elasto-container .elasto-square.active .elasto-square-wrap,
+.elasto-container .elasto-square.active:hover .elasto-square-wrap {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Square background on hover */
+.elasto-container .elasto-square:hover .elasto-square-bg {
+  opacity: 0.9;
+}
+
+/* Square text overlay on hover */
+.elasto-container .elasto-square:hover .elasto-square-wrap {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/*# sourceMappingURL=elasto.css.map */

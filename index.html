@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	
     <head>
         
         <title>wauv - web audio visualiser</title>
@@ -10,31 +11,34 @@
         <meta charset="utf-8" />
         
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" type="text/css">
-        <link rel="stylesheet" href="css/main.css" type="text/css" />
-        <link rel="stylesheet" href="css/tooltipster.css" type="text/css" />
-        <link rel="stylesheet" href="css/greed.css" type="text/css" />
+        <link rel="stylesheet" href="css/vendor/tooltipster.css" type="text/css" />
+        <link rel="stylesheet" href="css/vendor/elasto.css" type="text/css" />
+        <link rel="stylesheet" href="css/elasto-custom.css" type="text/css" />
+		<link rel="stylesheet" href="css/main.css" type="text/css" />
         
         <!-- Vendor scripts -->
-        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script src="http://connect.soundcloud.com/sdk.js"></script>
-        <script src="javascript/vendor/jquery.tooltipster.min.js"></script>
-        <script src="javascript/vendor/bowser.min.js"></script>
-		<script src="javascript/vendor/raphael.min.js"></script>
-		<script src="javascript/vendor/three.min.js"></script>
-		<script src="javascript/vendor/chroma.min.js"></script>
-        <script src="javascript/vendor/greed.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery.tooltipster.min.js"></script>
+        <script type="text/javascript" src="js/vendor/bowser.min.js"></script>
+		<script type="text/javascript" src="js/vendor/raphael.min.js"></script>
+		<script type="text/javascript" src="js/vendor/three.min.js"></script>
+		<script type="text/javascript" src="js/vendor/chroma.min.js"></script>
+        <script type="text/javascript" src="js/vendor/elasto.min.js"></script>
         
         <!-- Audio analyser classes -->
-        <script src="javascript/SoundCloudAudioAnalyser.js"></script>
+        <script type="text/javascript" src="js/SoundCloudAudioAnalyser.js"></script>
         
         <!-- Animation classes -->
-		<script src="javascript/animation/Speaker.js"></script>
-		<script src="javascript/animation/Ripples.js"></script>
-		<script src="javascript/animation/Sonar.js"></script>
-        <script src="javascript/animation/classes.js"></script>
+		<script type="text/javascript" src="js/animation/Hyperspace.js"></script>
+		<script type="text/javascript" src="js/animation/SpeakerSonar.js"></script>
+		<script type="text/javascript" src="js/animation/Speaker.js"></script>
+		<script type="text/javascript" src="js/animation/Ripples.js"></script>
+		<script type="text/javascript" src="js/animation/Sonar.js"></script>
+        <script type="text/javascript" src="js/animations.js"></script>
         
         <!-- UI logic script -->
-        <script src="javascript/main.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
 		
 		<!-- Google analytics object-->
 		<script>
@@ -58,6 +62,7 @@
 		<link rel="icon" href="images/favicon.png">
 		
     </head>
+	
     <body>
         
         <div id="sideBar">
@@ -260,5 +265,5 @@
         </div>
         
     </body>
+	
 </html>
-

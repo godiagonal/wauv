@@ -31,20 +31,20 @@ $(function() {
     });
     
     // create grid for search results
-    searchGrid = new Greed('resultContainer', null, {
+    searchGrid = $('#resultContainer').elasto(null, {
         select: function(track) { setAudio(track.permalink_url); },
-        objectKeys: { title: 'title', text: 'artist', image: 'image' },
+        displayProperties: { title: 'title', description: 'artist', image: 'image' },
         minSize: 200
     });
     
     // create grid with animation styles
-    styleGrid = new Greed('animationSettingsContainer', animations, {
+    styleGrid = $('#animationSettingsContainer').elasto(animations, {
         select: function(animation) { setAnimation(animation); },
-        objectKeys: { title: 'name', image: 'image' },
-        minSize: 150
+        displayProperties: { title: 'name', description: 'creator', image: 'image' },
+        minSize: 200
     });
     
-    styleGrid.keyEventsEnabled = false;
+    styleGrid.options.keyEventsEnabled = false;
     
     $('#track').on('play', playAudio);
     $('#track').on('pause', pauseAudio);
@@ -398,8 +398,8 @@ var displayEvents = function(e) {
 var showControls = function() {
     
     // disable grid events
-    searchGrid.keyEventsEnabled = false;
-    styleGrid.keyEventsEnabled = false;
+    searchGrid.options.keyEventsEnabled = false;
+    styleGrid.options.keyEventsEnabled = false;
     
     // change bg and logo color depending on current animation
     $('body').removeClass();
@@ -461,8 +461,8 @@ var showOverlayPage = function(pageId) {
     hideModal();
     
     // disable grid events
-    searchGrid.keyEventsEnabled = false;
-    styleGrid.keyEventsEnabled = false;
+    searchGrid.options.keyEventsEnabled = false;
+    styleGrid.options.keyEventsEnabled = false;
     
     // start by hiding the audio controls
     $('#controls').animate({ opacity: 0 }, 500, function() {
@@ -481,11 +481,11 @@ var showOverlayPage = function(pageId) {
             case '#trackSearch':
                 $('#txtSearch').focus();
                 searchGrid.resize();
-                searchGrid.keyEventsEnabled = true; // enable grid events
+                searchGrid.options.keyEventsEnabled = true; // enable grid events
                 break;
             case '#animationSettings':
                 styleGrid.resize();
-                styleGrid.keyEventsEnabled = true;
+                styleGrid.options.keyEventsEnabled = true;
                 break;
         }
         
