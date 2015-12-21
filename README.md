@@ -1,6 +1,9 @@
 # wauv - web audio visualiser
 Audio visualisation project using the Web Audio and SoundCloud API. Visit the site at [wauv.it](http://wauv.it).
 
+### Known issues
+* Some tracks won't play due to a broken access-control response header from the SoundCloud API. SoundCloud is aware of the issue and will hopefully solve it soon!
+
 # Contribute
 If you're a developer and feel like making your own visualisations we welcome you to fork the project and give it a go! All contributions are appreciated.
 
