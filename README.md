@@ -69,7 +69,7 @@ The rest we leave to you. You may add as many private methods as you want to kee
 ## Include your animation class in the application
 1. Place your animation class in the **javascript/animation** folder
 2. Include it with a script tag in **index.html**
-3. Add a new object containing info about your class to the animations array in **javascript/animation/classes.js**
+3. Add a new object containing info about your class to the animations array in **javascript/animations.js**
 4. Done! Try it out by using the animation style view (ctrl + d)
 
 # API Reference
