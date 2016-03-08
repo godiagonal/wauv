@@ -38,9 +38,7 @@ var animations = [
         image: '',
         background: '#eeeeee',
         init: function() {
-            return new space(audioSource, {
-                circleCount: 8
-            });
+            return new space(audioSource, {});
         }
     }
 ]
