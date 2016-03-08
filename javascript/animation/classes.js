@@ -31,5 +31,16 @@ var animations = [
                 circleCount: 8
             });
         }
+    },
+    {
+        name: 'space',
+        slug: 'space',
+        image: '',
+        background: '#eeeeee',
+        init: function() {
+            return new space(audioSource, {
+                circleCount: 8
+            });
+        }
     }
 ]
