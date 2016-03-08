@@ -13,7 +13,7 @@ var animFrame,
     searchGrid,
     styleGrid;
 
-$(function() {  
+$(function() {   
     
     // before we do anything, check if the browser is supported
     if (!isBrowserCompatible()) {
