@@ -29,7 +29,7 @@ function space( audioSource, options ) {
 
             // http://threejs.org/docs/#Reference/Extras.Geometries/OctahedronGeometry
             solarSystem: {
-                amount: 200,
+                amount: 150,
                 material: {
                     color: 0xffffff,
                     wireframe: true
@@ -41,8 +41,8 @@ function space( audioSource, options ) {
             },
 
             space: {
-                outerBoundsX: 4 * window.innerWidth,
-                outerBoundsY: 3 * window.innerHeight
+                outerBoundsX: 2.4 * window.innerWidth,
+                outerBoundsY: 2 * window.innerHeight
             }
         }
 
