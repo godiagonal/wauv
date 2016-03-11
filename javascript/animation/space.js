@@ -29,15 +29,20 @@ function space( audioSource, options ) {
 
             // http://threejs.org/docs/#Reference/Extras.Geometries/OctahedronGeometry
             solarSystem: {
-                amount: 100,
+                amount: 200,
                 material: {
                     color: 0xffffff,
                     wireframe: true
                 },
-                maxSize: 12,
+                maxSize: 7,
                 minSize: 1,
                 maxPlanets: 9,
                 minPlanets: 1
+            },
+
+            space: {
+                outerBoundsX: 4 * window.innerWidth,
+                outerBoundsY: 3 * window.innerHeight
             }
         }
 
@@ -72,22 +77,24 @@ function space( audioSource, options ) {
 
         // Hexadecimal colors for the planets.
         , planetColors = [
-            0xED303C,
+            0x95C272,
             0x7FC7AF,
             0x5D4157,
             0xCAD7B2,
-            0x82543B
+            0x031634
         ]
 
         // Data & utility
         , stream
         , ii, jj, kk
         , x, y, z
+        , xShift = 0, yShift = 0
+        , mouseX, mouseY
         , rx, ry, rz
         , history, h, hl
-        , velocity, v
-        , amplificationFactor, amp, ampHistory = [], averageAmp
-        , amountOfPlanets, orbitingPlanets = [], planet, planetColor, planetMaterial
+        , velocity
+        , ampHistory = [], averageAmp
+        , amountOfPlanets, orbitingPlanets = [], planetColor, planetMaterial
         , solarSystem, star, barycenter, size
         , pivot
         , startTime
@@ -116,7 +123,7 @@ function space( audioSource, options ) {
         // make tetrahedron
         for( ii = 0 ; ii < _options.tetrahedron.amount ; ii++ ) {
 
-            geometry = new THREE.TetrahedronGeometry( _options.tetrahedron.size * (ii*0.4+1) );
+            geometry = new THREE.TetrahedronGeometry( _options.tetrahedron.size * (ii+1) );
             mesh     = new THREE.Mesh( geometry, tetrahedronMaterial );
             _scene.add(mesh);
             tetrahedron.push(mesh);
@@ -127,42 +134,35 @@ function space( audioSource, options ) {
         for( ii = 0 ; ii < _options.solarSystem.amount ; ii++ ) {
 
             size = rnd( _options.solarSystem.minSize, _options.solarSystem.maxSize );
-            x    = rnd( -window.innerWidth, window.innerWidth );
-            y    = rnd( -window.innerHeight, window.innerHeight );
+            x    = rnd( -_options.space.outerBoundsX, _options.space.outerBoundsX );
+            y    = rnd( -_options.space.outerBoundsY, _options.space.outerBoundsY );
             z    = rnd( 0, _options.camera.position.z );
 
             barycenter      = new THREE.Object3D();
             geometry        = new THREE.OctahedronGeometry( size );
             mesh            = new THREE.Mesh( geometry, starMaterial );
             orbitingPlanets = [];
-
-            barycenter.position.x = x;
-            barycenter.position.y = y;
-            barycenter.position.z = z;
-
-            barycenter.add( mesh );
-            _scene.add( barycenter );
-
-            solarSystem = {
+            amountOfPlanets = rnd( _options.solarSystem.minPlanets, _options.solarSystem.maxPlanets );
+            solarSystem     = {
                 mesh: mesh,
-                barycenter: barycenter,
+                barycenter: null,
                 planets: []
             };
 
-            amountOfPlanets = rnd( _options.solarSystem.minPlanets, _options.solarSystem.maxPlanets );
+            // Add mesh to pivot.
+            barycenter.add( mesh );
 
             // make planet
             for( jj = 0 ; jj < amountOfPlanets ; jj++ ) {
+
                 planetColor     = planetColors[ rnd(0,4) ];
                 planetMaterial  = new THREE.MeshBasicMaterial( { wireframe: true, color: planetColor } );
                 geometry        = new THREE.OctahedronGeometry( (0.02 * rnd(1,10)) * size ); // Planets 2-20% size of star
                 mesh            = new THREE.Mesh( geometry, planetMaterial );
                 pivot           = new THREE.Object3D();
 
-
-                pivot.position.x = x;
-                pivot.position.y = y;
-                pivot.position.z = z;
+                pivot.position.x += rnd(-25,25);
+                pivot.position.z += rnd(-25,25);
 
                 barycenter.add( pivot );
                 pivot.add( mesh );
@@ -170,24 +170,29 @@ function space( audioSource, options ) {
 
             }
 
+            barycenter.position.x = x;
+            barycenter.position.y = y;
+            barycenter.position.z = z;
+
+
             solarSystem.barycenter = barycenter;
             solarSystem.planets = orbitingPlanets;
             solarSystems.push( solarSystem );
+            _scene.add( barycenter );
 
         }
 
         _renderer.setSize( window.innerWidth, window.innerHeight );
         _renderer.setClearColor( _options.spaceColor, 1 );
+        tetrahedron = tetrahedron.reverse();
         document.body.appendChild( _renderer.domElement );
         startTime = Date.now();
 
     };
 
-    this.draw = function() {
+    this.draw = function(e) {
 
-        stream      = audioSource.getFrequencyDataBySize( 8 );
-        tetrahedron = tetrahedron.reverse();
-        timeElapsed = -(0 + startTime - Date.now());
+        stream = audioSource.getFrequencyDataBySize( 8 );
 
         // Adds the sum of stream[0]->stream[stream.length-1] to ampHistory
         ampHistory.push(stream.reduce(function(pv, cv) { return pv + cv; }, 0));
@@ -199,14 +204,13 @@ function space( audioSource, options ) {
         h = ampHistory;
         hl = ampHistory.length - 1;
         averageAmp = ( h[hl] + h[hl-5] + h[hl-10] ) / 6;
-        velocity = averageAmp > 200 ? Math.pow((0.055 * averageAmp),2) : 200;
+        velocity = Math.pow( averageAmp * 0.12, 1.7 ) * 0.01;
 
         // Animate our tetrahedron.
         for( ii = 0 ; ii < tetrahedron.length ; ii++ ) {
-            tetrahedron[ ii ].rotateX( 0.003 );
-            tetrahedron[ ii ].rotateY( 0.004 );
-            tetrahedron[ ii ].rotateZ( 0.004 );
-            //tetrahedron[ ii ].rotateZ( 0.0035 * -(stream[ ii ] * 0.01) );
+            tetrahedron[ ii ].rotateX( 0.004 );
+            tetrahedron[ ii ].rotateY( 0.003 );
+            tetrahedron[ ii ].rotateZ( 0.0025 );
             tetrahedron[ ii ].scale.x = 1 + stream[ ii ] * 0.01;
             tetrahedron[ ii ].scale.y = 1 + stream[ ii ] * 0.015;
             tetrahedron[ ii ].scale.z = 1 + stream[ ii ] * 0.0175;
@@ -218,20 +222,18 @@ function space( audioSource, options ) {
             barycenter = solarSystems[ ii ].barycenter;
             planets    = solarSystems[ ii ].planets;
             star       = solarSystems[ ii ].mesh;
-            rx         = 0.03 * stream[ 1 ];
-            ry         = 0.02 * stream[ 1 ];
-            rz         = 0.004;
-            z          = 0.02 * velocity;
+            rz         = 0.008;
+            z          = velocity > 0.2 ? velocity : 0.2;
 
-            barycenter.rotateZ( rz );
-            //star.rotateX( rx );
-            //star.rotateY( ry );
+            barycenter.rotateY( rz );
             barycenter.position.z += z;
+            barycenter.position.x -= xShift;
+            barycenter.position.y += yShift;
 
             // Reboot solar system if out of screen.
             if( barycenter.position.z > _camera.position.z ) {
-                barycenter.position.x = rnd(-window.innerWidth,window.innerWidth);
-                barycenter.position.y = rnd(-window.innerHeight,window.innerHeight);
+                barycenter.position.x = rnd( -_options.space.outerBoundsX, _options.space.outerBoundsX );
+                barycenter.position.y = rnd( -_options.space.outerBoundsY, _options.space.outerBoundsY );
                 barycenter.position.z = 0;
             }
         }
@@ -243,6 +245,13 @@ function space( audioSource, options ) {
     this.destroy = function() {
         _scene = null;
         _camera = null;
+    };
+
+    document.onmousemove = function(e){
+        mouseX = e.clientX - window.innerWidth / 2;
+        mouseY = e.clientY - window.innerHeight / 2;
+        xShift = mouseX / 400;
+        yShift = mouseY / 300;
     };
 
     _init();
