@@ -243,8 +243,10 @@ function space( audioSource, options ) {
     };
 
     this.destroy = function() {
+        document.body.removeChild( _renderer.domElement );
         _scene = null;
         _camera = null;
+        
     };
 
     document.onmousemove = function(e){
