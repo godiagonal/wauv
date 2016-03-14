@@ -28,6 +28,7 @@ body.dark {
 svg,
 canvas {
     position: absolute;
+    top: 0;
     min-width: 870px;
     z-index: 1;
 }
