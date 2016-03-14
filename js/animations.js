@@ -1,5 +1,15 @@
 var animations = [
     {
+        name: 'Space',
+        slug: 'space',
+        image: '',
+        creator: 'by Janne',
+        background: 'dark',
+        init: function() {
+            return new space(audioSource, {});
+        }
+    },
+    {
         name: 'Speaker',
         slug: 'speaker',
         image: 'images/animation/speaker.png',
