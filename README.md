@@ -13,9 +13,9 @@ If you're a developer and feel like making your own visualisations we welcome yo
 4. Create a pull request
 
 ## Create an animation class
-Please use [Speaker.js](javascript/animation/Speaker.js) as a reference and guideline for constructing your own animation classes.
+Please use [Speaker.js](js/animation/Speaker.js) as a reference and guideline for constructing your own animation classes.
 
-Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class; [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js), API reference below.
+Your animation class should focus solely on one task; rendering graphics based on audio data. How you want to visualise the music is up to you! The audio is streamed from SoundCloud and turned into quantitative data through an audio analyser class; [SoundCloudAudioAnalyser.js](js/SoundCloudAudioAnalyser.js), API reference below.
 
 Currently the following libraries are included and at your disposal:
 * three.js (3D rendering)
@@ -67,13 +67,13 @@ function MyAnimation(audioSource, options) {
 The rest we leave to you. You may add as many private methods as you want to keep your code nice and tidy. You can make use of included libraries such as raphael.js and chroma.js to enhance your animations, but try to keep performance in mind. If you want to include a new library please contact us before doing so.
 
 ## Include your animation class in the application
-1. Place your animation class in the **javascript/animation** folder
+1. Place your animation class in the **js/animation** folder
 2. Include it with a script tag in **index.html**
-3. Add a new object containing info about your class to the animations array in **javascript/animations.js**
+3. Add a new object containing info about your class to the animations array in **js/animations.js**
 4. Done! Try it out by using the animation style view (ctrl + d)
 
 # API Reference
-This is an API reference for [SoundCloudAudioAnalyser.js](javascript/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
+This is an API reference for [SoundCloudAudioAnalyser.js](js/SoundCloudAudioAnalyser.js) which is used to quantify frequency data of the currently played track.
 
 ## getFrequencyData()
 Returns array with quantified frequency data that can be used for animating. Every item in the array corresponds to an interval of frequencies (e.g. 20-100 Hz) and has a value between 0 and 255 (may vary, see `frequencyMaxValue`) which represents the avarage amplitude in that interval.
