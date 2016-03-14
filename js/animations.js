@@ -2,7 +2,7 @@ var animations = [
     {
         name: 'Space',
         slug: 'space',
-        image: '',
+        image: 'images/animation/space.png',
         creator: 'by Janne',
         background: 'dark',
         init: function() {
@@ -41,18 +41,6 @@ var animations = [
         background: '',
         init: function() {
             return new Hyperspace(audioSource);
-        }
-    },
-    {
-        name: 'Ripples',
-        slug: 'ripples',
-        image: 'images/animation/ripples.png',
-        creator: 'by Samuel',
-        background: 'dark',
-        init: function() {
-            return new Ripples(audioSource, {
-                circleCount: 8
-            });
         }
     }
 ]
