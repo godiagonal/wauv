@@ -78,7 +78,10 @@ $(function() {
 // check if browser is valid, for now this is only true for chrome
 var isBrowserCompatible = function() {
     
-    return bowser.chrome && !bowser.mobile;
+    if (bowser.mobile)
+        return false;
+    
+    return bowser.chrome || bowser.firefox || bowser.opera || bowser.safari;
     
 }
 
