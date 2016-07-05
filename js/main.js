@@ -574,27 +574,15 @@ var sendFeedback = function() {
     
         $.ajax({
             type: 'POST',
-            url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+            url: 'http://wauv.it/mail.php',
             data: {
-                'key': 'E2QNv2qWhLLI081Ft3ZzsQ',
-                'message': {
-                    'from_email': email.val() ? email.val() : 'dummy@wauv.it',
-                    'to': [
-                        {
-                            'email': 'samueljohanssonhue@gmail.com',
-                            'type': 'to'
-                        },
-                        {
-                            'email': 'lukasopeterson@gmail.com',
-                            'type': 'to'
-                        }
-                    ],
-                    'autotext': 'true',
-                    'subject': subject.val(),
-                    'html': message.val()
-                }
+                'from': email.val(),
+                'subject': subject.val(),
+                'body': message.val()
             }
         }).done(function(response) {
+            
+            console.log(response);
             
             // show success message
             $('#feedbackForm').animate({ opacity: 0 }, 200, function() {
